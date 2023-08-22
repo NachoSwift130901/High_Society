@@ -7,6 +7,10 @@ const luxuryCards = ['1','2','3','4','5','6','7','8','9','10'];
 const recognitionCards =['avantGarde','bonVivant','joieDeVivre'];
 const misfortuneCards=['fauxPas','scaddale','pasee'];
 
+//Contadores para el seguimiento de las tarjetas con fondo verde oscuro
+//Las cuales terminan el juego cuando hayan salido 4
+let endingCards = 0;
+
 //Creacion del mazo
 const deck = [];
 
@@ -37,8 +41,23 @@ function nextCard() {
       console.log("El mazo está vacío");
       return null;
     }
-    return deck.pop();
+    const card = deck.pop();
+
+    if(recognitionCards.includes(card) || card ==='scaddale'){
+        endingCards++;
+        
+        const endingCardsid = document.getElementById("endingCards");
+        endingCardsid.textContent = endingCards;
+
+        if(endingCards === 4){
+            endingCardsid.textContent = 'GAME OVER';
+        }
+    }
+    return card;
   }
+
+
+
 
 //Funcion para mostrar la siguiente carta
   

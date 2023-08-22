@@ -12,6 +12,7 @@
   <h1>High Society</h1>
   <button onclick="showCard()">Repartir Carta</button>
   <p>Carta repartida: <span id="showedCard"></span></p>
+  <p>Cartas ending:<span id='endingCards'></span></p>
 
   <script src="cards.js"></script>
 
