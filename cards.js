@@ -68,3 +68,22 @@ function nextCard() {
       shownCard.textContent = card;
     }
   }
+
+//Para sumar las apuestas
+var totalAmount = 0;
+var roundInProgress = false;
+
+function selectCard(value) {
+    if (!roundInProgress) {
+        totalAmount += value;
+        document.getElementById('total').textContent = 'Total: ' + totalAmount;
+        roundInProgress = true;
+    }
+}
+
+function endRound() {
+    roundInProgress = false;
+    totalAmount = 0;
+    document.getElementById('total').textContent = 'Total: ' + totalAmount;
+}
+
