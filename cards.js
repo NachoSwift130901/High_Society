@@ -75,27 +75,32 @@ const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
         const jugadores = 3;
 
         const container = document.getElementById('container');
+        const siguienteButton = document.getElementById('siguiente');
 
+        let turnoActual = 0;
         const jugadoresContadores = [];
 
         for (let i = 0; i < jugadores; i++) {
+            jugadoresContadores.push(0);
+        }
+
+        function actualizarTurno() {
+            container.innerHTML = ''; // Limpiar el contenido del contenedor
+
             const jugadorDiv = document.createElement('div');
-            jugadorDiv.innerHTML = `<h2>Jugador ${i + 1}</h2>`;
+            jugadorDiv.innerHTML = `<h2>Jugador ${turnoActual + 1}</h2>`;
             
             const contador = document.createElement('p');
-            contador.textContent = 'Contador: 0';
+            contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
             jugadorDiv.appendChild(contador);
-
-            let contadorValor = 0;
-            jugadoresContadores.push(contadorValor);
 
             for (const valor of valoresArray) {
                 const button = document.createElement('button');
                 button.textContent = valor;
                 button.addEventListener('click', () => {
                     if (!button.disabled) {
-                        contadorValor += valor;
-                        contador.textContent = `Contador: ${contadorValor}`;
+                        jugadoresContadores[turnoActual] += valor;
+                        contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
                         button.disabled = true;
                     }
                 });
@@ -105,3 +110,15 @@ const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
             
             container.appendChild(jugadorDiv);
         }
+
+        function pasarSiguiente() {
+            jugadoresContadores[turnoActual] = 0; // Reiniciar contador
+            turnoActual = (turnoActual + 1) % jugadores;
+            siguienteButton.style.display = 'block'; // Mostrar el botón "Siguiente"
+            actualizarTurno();
+        }
+
+        siguienteButton.addEventListener('click', pasarSiguiente);
+
+        siguienteButton.style.display = 'block'; // Mostrar el botón "Siguiente" al principio
+        actualizarTurno();

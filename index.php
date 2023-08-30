@@ -32,9 +32,9 @@
         <h2>Jugador num: </h2>
 
         <div id="container"></div>
+        <div id='bid'></div>
+        <button id="siguiente">Siguiente</button>
 
-
-        <h3>Apuesta del jugador <p id='bid'><h3>
         
         
 
