@@ -15,8 +15,12 @@ let endingCards = 0;
 let rondas=1;
 document.getElementById("ronda").textContent = `Ronda: ${rondas}`; // Actualiza el contenido del div 'ronda'
 
+//Contador para la apuesta mas alta
+let apuestaMasAltaRonda = 0;
+
 //Contador para ver que todos los jugadores hayan hecho su apuesta
 let jugadoresApuestaRealizada = 0;
+
 
 //Creacion del mazo
 const deck = [];
@@ -69,7 +73,7 @@ shuffleDeck(deck);
     }
   }
 
-//Para mostrar los botones
+        //Para mostrar los botones
 
         const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
         const jugadores = 3;
@@ -103,6 +107,12 @@ shuffleDeck(deck);
                         jugadoresContadores[turnoActual] += valor;
                         contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
                         button.disabled = true;
+                    
+                        if (jugadoresContadores[turnoActual] > apuestaMasAltaRonda) {
+                          apuestaMasAltaRonda = jugadoresContadores[turnoActual];
+                          document.getElementById("apuestaMasAlta").textContent = `Apuesta Más Alta de la Ronda: ${apuestaMasAltaRonda}`;
+                      }
+
                     }
                 });
 
@@ -110,6 +120,7 @@ shuffleDeck(deck);
             }
             
             container.appendChild(jugadorDiv);
+            
         }
 
         function pasarSiguienteJugador() {
@@ -124,6 +135,11 @@ shuffleDeck(deck);
               rondas++; // Incrementa el contador de rondas
               document.getElementById("ronda").textContent = `Ronda: ${rondas}`; // Actualiza el contenido del div 'ronda'
               jugadoresApuestaRealizada = 0; // Reinicia el contador de jugadores que han realizado su apuesta
+
+              // Reiniciar la apuesta más alta de la ronda al finalizar la ronda
+              apuestaMasAltaRonda = 0;
+              document.getElementById("apuestaMasAlta").textContent = `Apuesta Más Alta de la Ronda: ${apuestaMasAltaRonda}`;
+
           }
 
 
