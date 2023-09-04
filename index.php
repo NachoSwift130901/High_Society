@@ -29,28 +29,30 @@
   <h1>Cartas de los Jugadores</h1>
 
 
-        <h2>Jugador num: </h2>
+        <div id="apuesta-mas-alta"></div>
 
+
+
+
+        <div id='ronda'></div>
+        <br>
         <div id="container"></div>
-        <div id='bid'></div>
+        <div id='bid'></div><br>
+
+
         <button id="siguiente">Siguiente</button>
+        <br>
+        <button id='retirarse'>Retirarse</button>
 
         
         
 
-        
-
-
-
-   
-
-
-
+    
 
 
 
 </body>
-<script src="cards.js?V2">
+<script src="cards.js?v5">
 
     
 </script>

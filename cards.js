@@ -11,11 +11,18 @@ const misfortuneCards=['fauxPas','scaddale','pasee'];
 //Las cuales terminan el juego cuando hayan salido 4
 let endingCards = 0;
 
+//Contador para el num de rondas
+let rondas=1;
+document.getElementById("ronda").textContent = `Ronda: ${rondas}`; // Actualiza el contenido del div 'ronda'
+
+//Contador para ver que todos los jugadores hayan hecho su apuesta
+let jugadoresApuestaRealizada = 0;
+
 //Creacion del mazo
 const deck = [];
 
 //Funcion para agregar cartas al mazo
-function addCardsToDeck(cards) {
+  function addCardsToDeck(cards) {
     deck.push(...cards);
 }
 
@@ -25,18 +32,16 @@ addCardsToDeck(recognitionCards);
 addCardsToDeck(misfortuneCards);
 
 //Funcion para barajar usando Fisher-Yates
-function shuffleDeck(deck){
+  function shuffleDeck(deck){
     for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [deck[i], deck[j]] = [deck[j], deck[i]];
       }
 }
-
 //Barajar el mazo
 shuffleDeck(deck);
-
 //Funcion para sacar la siguiente carta
-function nextCard() {
+  function nextCard() {
     if (deck.length === 0) {
       console.log("El mazo está vacío");
       return null;
@@ -55,12 +60,7 @@ function nextCard() {
     }
     return card;
   }
-
-
-
-
 //Funcion para mostrar la siguiente carta
-  
   function showCard() {
     const card = nextCard();
     if (card !== null) {
@@ -71,7 +71,7 @@ function nextCard() {
 
 //Para mostrar los botones
 
-const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
+        const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
         const jugadores = 3;
 
         const container = document.getElementById('container');
@@ -79,6 +79,7 @@ const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
 
         let turnoActual = 0;
         const jugadoresContadores = [];
+      
 
         for (let i = 0; i < jugadores; i++) {
             jugadoresContadores.push(0);
@@ -111,14 +112,32 @@ const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
             container.appendChild(jugadorDiv);
         }
 
-        function pasarSiguiente() {
+        function pasarSiguienteJugador() {
             jugadoresContadores[turnoActual] = 0; // Reiniciar contador
             turnoActual = (turnoActual + 1) % jugadores;
             siguienteButton.style.display = 'block'; // Mostrar el botón "Siguiente"
+
+            // Incrementa el contador de rondas cuando todos los jugadores han realizado su apuesta
+            jugadoresApuestaRealizada++;
+
+            if (jugadoresApuestaRealizada === jugadores) {
+              rondas++; // Incrementa el contador de rondas
+              document.getElementById("ronda").textContent = `Ronda: ${rondas}`; // Actualiza el contenido del div 'ronda'
+              jugadoresApuestaRealizada = 0; // Reinicia el contador de jugadores que han realizado su apuesta
+          }
+
+
             actualizarTurno();
         }
 
-        siguienteButton.addEventListener('click', pasarSiguiente);
+        siguienteButton.addEventListener('click', () => {
+          pasarSiguienteJugador();
+      });
 
         siguienteButton.style.display = 'block'; // Mostrar el botón "Siguiente" al principio
         actualizarTurno();
+        
+
+
+        
+      
