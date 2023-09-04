@@ -90,38 +90,34 @@ shuffleDeck(deck);
         }
 
         function actualizarTurno() {
-            container.innerHTML = ''; // Limpiar el contenido del contenedor
-
-            const jugadorDiv = document.createElement('div');
-            jugadorDiv.innerHTML = `<h2>Jugador ${turnoActual + 1}</h2>`;
-            
-            const contador = document.createElement('p');
-            contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
-            jugadorDiv.appendChild(contador);
-
-            for (const valor of valoresArray) {
-                const button = document.createElement('button');
-                button.textContent = valor;
-                button.addEventListener('click', () => {
-                    if (!button.disabled) {
-                        jugadoresContadores[turnoActual] += valor;
-                        contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
-                        button.disabled = true;
-                    
-                        if (jugadoresContadores[turnoActual] > apuestaMasAltaRonda) {
-                          apuestaMasAltaRonda = jugadoresContadores[turnoActual];
-                          document.getElementById("apuestaMasAlta").textContent = `Apuesta Más Alta de la Ronda: ${apuestaMasAltaRonda}`;
-                      }
-
-                    }
-                });
-
-                jugadorDiv.appendChild(button);
-            }
-            
-            container.appendChild(jugadorDiv);
-            
-        }
+          container.innerHTML = ''; // Limpiar el contenido del contenedor
+      
+          const jugadorDiv = document.createElement('div');
+          jugadorDiv.innerHTML = `<h2>Jugador ${turnoActual + 1}</h2>`;
+          
+          const contador = document.createElement('p');
+          contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
+          jugadorDiv.appendChild(contador);
+      
+          for (const valor of valoresArray) {
+              const button = document.createElement('button');
+              button.textContent = valor;
+              
+      
+              button.addEventListener('click', () => {
+                const apuestaActual = jugadoresContadores[turnoActual] + valor;
+                if (apuestaActual > apuestaMasAltaRonda || button.style.backgroundColor !== 'gray') {
+                    jugadoresContadores[turnoActual] += (button.style.backgroundColor === 'gray' ? -valor : valor);
+                    contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
+                    button.style.backgroundColor = (button.style.backgroundColor === 'gray') ? '' : 'gray';
+                } 
+            });
+      
+              jugadorDiv.appendChild(button);
+          }
+          
+          container.appendChild(jugadorDiv);
+      }
 
         function pasarSiguienteJugador() {
             jugadoresContadores[turnoActual] = 0; // Reiniciar contador
@@ -148,7 +144,7 @@ shuffleDeck(deck);
 
         siguienteButton.addEventListener('click', () => {
           pasarSiguienteJugador();
-      });
+        });
 
         siguienteButton.style.display = 'block'; // Mostrar el botón "Siguiente" al principio
         actualizarTurno();

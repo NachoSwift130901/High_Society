@@ -31,6 +31,8 @@
 
         <div id="apuestaMasAlta"></div>
 
+        <div id="apuestaActual"></div>
+
 
 
 
@@ -49,7 +51,7 @@
 
 
 </body>
-<script src="cards.js?v9">
+<script src="cards.js?v14">
 
     
 </script>
