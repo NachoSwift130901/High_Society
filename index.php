@@ -29,9 +29,11 @@
   <h1>Cartas de los Jugadores</h1>
 
 
-        <div id="apuestaMasAlta"></div>
+        <div id="apuestaMasAlta"></div><br>
 
         <div id="apuestaActual"></div>
+
+        <div id="apuestasActuales"></div><br>
 
 
 
@@ -51,7 +53,7 @@
 
 
 </body>
-<script src="cards.js?v14">
+<script src="cards2.js?v16">
 
     
 </script>

@@ -17,9 +17,13 @@ document.getElementById("ronda").textContent = `Ronda: ${rondas}`; // Actualiza 
 
 //Contador para la apuesta mas alta
 let apuestaMasAltaRonda = 0;
+document.getElementById("apuestaMasAlta").textContent = `Apuesta Más Alta de la Ronda: ${apuestaMasAltaRonda}`;
 
 //Contador para ver que todos los jugadores hayan hecho su apuesta
 let jugadoresApuestaRealizada = 0;
+
+// Jugadores retirados
+let jugadoresRetirados = 0;
 
 
 //Creacion del mazo
@@ -73,7 +77,7 @@ shuffleDeck(deck);
     }
   }
 
-        //Para mostrar los botones
+        //Para mostrar los botones y los jugadores
 
         const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
         const jugadores = 3;
@@ -98,19 +102,30 @@ shuffleDeck(deck);
           const contador = document.createElement('p');
           contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
           jugadorDiv.appendChild(contador);
+
+          
+        // Actualizar el elemento "apuestasActuales" para mostrar todas las apuestas actuales
+          const apuestasActualesDiv = document.getElementById('apuestasActuales');
+          apuestasActualesDiv.innerHTML = 'Apuestas Actuales de los Jugadores:<br>';
+          for (let i = 0; i < jugadores; i++) {
+            apuestasActualesDiv.innerHTML += `Jugador ${i + 1}: ${jugadoresContadores[i]}<br>`;
+          }
+          
+
       
           for (const valor of valoresArray) {
               const button = document.createElement('button');
               button.textContent = valor;
-              
+
       
               button.addEventListener('click', () => {
                 const apuestaActual = jugadoresContadores[turnoActual] + valor;
                 if (apuestaActual > apuestaMasAltaRonda || button.style.backgroundColor !== 'gray') {
-                    jugadoresContadores[turnoActual] += (button.style.backgroundColor === 'gray' ? -valor : valor);
-                    contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
-                    button.style.backgroundColor = (button.style.backgroundColor === 'gray') ? '' : 'gray';
-                } 
+                  jugadoresContadores[turnoActual] += (button.style.backgroundColor === 'gray' ? -valor : valor);
+                  contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
+                  button.style.backgroundColor = (button.style.backgroundColor === 'gray') ? '' : 'gray';
+                }
+                
             });
       
               jugadorDiv.appendChild(button);
@@ -131,16 +146,37 @@ shuffleDeck(deck);
               rondas++; // Incrementa el contador de rondas
               document.getElementById("ronda").textContent = `Ronda: ${rondas}`; // Actualiza el contenido del div 'ronda'
               jugadoresApuestaRealizada = 0; // Reinicia el contador de jugadores que han realizado su apuesta
+              
+
+              
 
               // Reiniciar la apuesta más alta de la ronda al finalizar la ronda
               apuestaMasAltaRonda = 0;
               document.getElementById("apuestaMasAlta").textContent = `Apuesta Más Alta de la Ronda: ${apuestaMasAltaRonda}`;
+
+              // Actualiza el elemento "apuestasActuales" con la apuesta actual del jugador
+              const apuestasActualesDiv = document.getElementById('apuestasActuales');
+              apuestasActualesDiv.innerHTML += `Jugador ${turnoActual + 1}: ${jugadoresContadores[turnoActual]}<br>`;
+
+              // Reinicia el contador de jugadores retirados
+              jugadoresRetirados = 0;
+    
 
           }
 
 
             actualizarTurno();
         }
+
+        //Manejador de eventos al botón "Retirarse" para que los jugadores se retiren
+        const retirarseButton = document.getElementById('retirarse');
+        retirarseButton.addEventListener('click', () => {
+                alert('te has retirado');
+              // Marca al jugador actual como retirado
+              jugadoresRetirados++;
+              // Pasa al siguiente jugador
+              pasarSiguienteJugador();
+          });
 
         siguienteButton.addEventListener('click', () => {
           pasarSiguienteJugador();
@@ -152,4 +188,5 @@ shuffleDeck(deck);
 
 
         
-      
+
+        
