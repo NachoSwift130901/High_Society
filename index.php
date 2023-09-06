@@ -53,7 +53,7 @@
 
 
 </body>
-<script src="cards2.js?v16">
+<script src="cards.js?v16">
 
     
 </script>
