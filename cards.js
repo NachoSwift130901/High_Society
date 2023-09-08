@@ -114,6 +114,23 @@ shuffleDeck(deck);
         //Para mostrar los botones y los jugadores
 
         const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
+        const valoresArrayImages = {
+          
+          '1': 'img/1francs.jpg',
+          '2': 'img/2francs.jpg',
+          '3': 'img/3francs.jpg',
+          '4': 'img/4francs.jpg',
+          '6': 'img/6francs.jpg',
+          '8': 'img/8francs.jpg',
+          '10': 'img/10francs.jpg',
+          '12': 'img/12francs.jpg',
+          '15': 'img/15francs.jpg',
+          '20': 'img/20francs.jpg',
+          '25': 'img/25francs.jpg',
+          
+        }
+
+
         const jugadores = 3;
 
         const container = document.getElementById('container');
@@ -149,7 +166,15 @@ shuffleDeck(deck);
       
           for (const valor of valoresArray) {
               const button = document.createElement('button');
-              button.textContent = valor;
+              
+
+
+              const img = document.createElement('img');
+              img.src = valoresArrayImages[valor];
+
+              img.classList.add('botonesDinero');
+
+              button.appendChild(img);
 
       
               button.addEventListener('click', () => {

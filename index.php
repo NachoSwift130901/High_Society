@@ -7,7 +7,7 @@
   <title>High Society</title>
   
   <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="index.css?v3">
+  <link rel="stylesheet" type="text/css" href="index.css?v4">
 
 </head>
 
@@ -58,7 +58,7 @@
 
 
 </body>
-<script src="cards.js?v22">
+<script src="cards.js?v24">
 
     
 </script>
