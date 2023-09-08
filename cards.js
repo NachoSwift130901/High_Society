@@ -4,8 +4,32 @@ const moneyCards = ['1', '2', '3', '4','6','8','10','12','15','20','25'];
 
 //Set de cartas para el mazo
 const luxuryCards = ['1','2','3','4','5','6','7','8','9','10'];
+
 const recognitionCards =['avantGarde','bonVivant','joieDeVivre'];
-const misfortuneCards=['fauxPas','scaddale','pasee'];
+
+const misfortuneCards=['fauxPas','scaddale','passe'];
+
+const allCardsImages = {
+  //Imagenes de las cartas luxury
+  '1': 'img/luxury1.jpg',
+  '2': 'img/luxury2.jpg',
+  '3': 'img/luxury3.jpg',
+  '4': 'img/luxury4.jpg',
+  '5': 'img/luxury5.jpg',
+  '6': 'img/luxury6.jpg',
+  '7': 'img/luxury7.jpg',
+  '8': 'img/luxury8.jpg',
+  '9': 'img/luxury9.jpg',
+  '10': 'img/luxury10.jpg',
+  //Imagenes de las recognitio cards
+  'avantGarde': 'img/avantGarde.jpg',
+  'bonVivant': 'img/bonVivant.jpg',
+  'joieDeVivre': 'img/joieDeVivre.jpg',
+  //Imagenes de las misfortunteCards
+  'fauxPas': 'img/fauxPas.jpg',
+  'scaddale': 'img/scaddale.jpg',
+  'pasee': 'img/pasee.jpg',
+}
 
 //Contadores para el seguimiento de las tarjetas con fondo verde oscuro
 //Las cuales terminan el juego cuando hayan salido 4
@@ -73,9 +97,19 @@ shuffleDeck(deck);
     const card = nextCard();
     if (card !== null) {
       const shownCard = document.getElementById("showedCard");
-      shownCard.textContent = card;
+
+      const img = document.createElement('img');
+
+      
+        img.src = allCardsImages[card];
+      
+
+      shownCard.innerHTML='';
+
+      shownCard.appendChild(img);
     }
   }
+
 
         //Para mostrar los botones y los jugadores
 

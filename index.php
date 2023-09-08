@@ -7,7 +7,7 @@
   <title>High Society</title>
   
   <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="index.css?v1">
+  <link rel="stylesheet" type="text/css" href="index.css?v3">
 
 </head>
 
@@ -20,7 +20,8 @@
 
 
 
-  <p>Carta repartida: <span id="showedCard"></span></p>
+  <p>Carta repartida: </p>
+  <span id="showedCard"></span>
   <p>Cartas ending:<span id='endingCards'></span></p>
 
 
@@ -57,7 +58,7 @@
 
 
 </body>
-<script src="cards.js?v16">
+<script src="cards.js?v22">
 
     
 </script>
