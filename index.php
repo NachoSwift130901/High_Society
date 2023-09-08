@@ -28,6 +28,8 @@
 
   <h1>Cartas de los Jugadores</h1>
 
+        <div class="infoPartida">
+
 
         <div id="apuestaMasAlta"></div><br>
 
@@ -40,6 +42,8 @@
 
         <div id='ronda'></div>
         <br>
+
+        </div>
         <div id="container"></div>
         <div id='bid'></div><br>
 
