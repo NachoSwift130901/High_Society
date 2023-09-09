@@ -1,5 +1,5 @@
 import Deck from "./cards.js?v6"
-import Jugador from "./players.js?v3"
+import Jugador from "./players.js?v4"
 
 const deck = new Deck()
 deck.shuffleDeck()
@@ -11,6 +11,15 @@ const container = document.getElementById('contenedor');
 
 
 const jugadores = [new Jugador("MARII"), new Jugador("nacho"), new Jugador("juan")];
+console.log(`El estado de fold de ${jugadores[1].obtenerNombre()} es: ${jugadores[1].obtenerFold()}`);
+
+jugadores[1].rendirse();
+
+console.log(`El estado de fold de ${jugadores[1].obtenerNombre()} es: ${jugadores[1].obtenerFold()}`);
+
+
+
+
 
 
 
@@ -56,7 +65,7 @@ jugadores.forEach((jugador) => {
 
 
 
-
+      
       function mostrarDinero(jugador, contenedor, apuestaElement){
             const valoresArray = jugador.obtenerDinero();
             const valoresArrayImages = {
@@ -101,27 +110,11 @@ jugadores.forEach((jugador) => {
                     // Cambiar el fondo del botón a su estado original (no gris)
                     button.style.backgroundColor = ''; 
                   }
-
-            
                   apuestaElement.textContent = `Apuesta Actual: ${jugador.obtenerBid()}`;
-
-                  
-                
-                // apuestaMasAltaRonda = 0;
-                // const apuestaActual = jugador.obtenerBid() + valor;
-                // if (apuestaActual > apuestaMasAltaRonda || button.style.backgroundColor !== 'gray') {
-                //   jugadoresContadores[turnoActual] += (button.style.backgroundColor === 'gray' ? -valor : valor);
-                //   contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
-                //   button.style.backgroundColor = (button.style.backgroundColor === 'gray') ? '' : 'gray';
-                // }
-                
             });
             contenedor.appendChild(button);
-              
           }
       }
-
-
       function obtenerPuntaje(inventario){
         let puntaje = 0;
 

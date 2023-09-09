@@ -29,6 +29,10 @@ export default class Jugador{
         return this.bid;
     }
 
+    rendirse() {
+        this.fold = true;
+      }
+
 
 }
 
