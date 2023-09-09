@@ -9,6 +9,19 @@ export default class Deck{
   constructor(cards = freshDeck()){
     this.cards = cards;
   }
+
+  get numberofCards(){
+    return this.cards.length
+  }
+
+  shuffleDeck(){
+    for (let i = this.cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+    }
+  }
+
+  
   
 }
 class Card{
@@ -17,32 +30,10 @@ class Card{
   }
 }
 function freshDeck(){
-    return luxuryCards.map(value => {
-      return new Card(value)
-    })
-  
-    //Creacion del mazo
-    const deck = [];
 
-    //Funcion para agregar cartas al mazo
-      function addCardsToDeck(cards) {
-        deck.push(...cards);
-    }
-
-    //Agregar las cartas al mazo
-    addCardsToDeck(luxuryCards);
-    addCardsToDeck(recognitionCards);
-    addCardsToDeck(misfortuneCards);
-
-    //Funcion para barajar usando Fisher-Yates 
-      function shuffleDeck(deck){
-        for (let i = deck.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [deck[i], deck[j]] = [deck[j], deck[i]];
-          }
-    }
-      //Barajar el mazo
-      shuffleDeck(deck);
+    const allCards = [...luxuryCards, ...recognitionCards, ...misfortuneCards];
+    return allCards.map(value => new Card(value))
+    
 
         /*Funcion para sacar la siguiente carta
         function nextCard() {
@@ -82,7 +73,7 @@ function freshDeck(){
           }
         }
         */
-}
+  }
 
 
 //Set inicial de 11 money cards
