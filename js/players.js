@@ -29,8 +29,6 @@ export default class Jugador{
         return this.bid;
     }
 
-    
-
 
 }
 

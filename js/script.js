@@ -38,7 +38,7 @@ jugadores.forEach((jugador) => {
   const botonesDineroDiv = document.createElement('div');
   botonesDineroDiv.classList.add("botonesDinero");
 
-  mostrarDinero(jugador, botonesDineroDiv);
+  mostrarDinero(jugador, botonesDineroDiv, apuestaElement);
 
   
 
@@ -57,71 +57,87 @@ jugadores.forEach((jugador) => {
 
 
 
-    function mostrarDinero(jugador, contenedor){
-
-      //const valoresArray = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25];
-      const valoresArray = jugador.obtenerDinero();
-
-      const valoresArrayImages = {
-  
-        '1': 'img/1francs.jpg',
-        '2': 'img/2francs.jpg',
-        '3': 'img/3francs.jpg',
-        '4': 'img/4francs.jpg',
-        '6': 'img/6francs.jpg',
-        '8': 'img/8francs.jpg',
-        '10': 'img/10francs.jpg',
-        '12': 'img/12francs.jpg',
-        '15': 'img/15francs.jpg',
-        '20': 'img/20francs.jpg',
-        '25': 'img/25francs.jpg',
+      function mostrarDinero(jugador, contenedor, apuestaElement){
+            const valoresArray = jugador.obtenerDinero();
+            const valoresArrayImages = {
         
+              '1': 'img/1francs.jpg',
+              '2': 'img/2francs.jpg',
+              '3': 'img/3francs.jpg',
+              '4': 'img/4francs.jpg',
+              '6': 'img/6francs.jpg',
+              '8': 'img/8francs.jpg',
+              '10': 'img/10francs.jpg',
+              '12': 'img/12francs.jpg',
+              '15': 'img/15francs.jpg',
+              '20': 'img/20francs.jpg',
+              '25': 'img/25francs.jpg',
+              
+            }
+
+            for (const valor of valoresArray) {
+              const button = document.createElement('button');
+              const img = document.createElement('img');
+
+              img.src = valoresArrayImages[valor];
+              img.classList.add('botonesDinero');
+              button.appendChild(img);
+
+
+              button.addEventListener('click', () => {
+                  const apuestaActual = jugador.obtenerBid();
+                  const valorBoton = valor;
+                  
+                  const estaPresionado = button.style.backgroundColor === 'gray';
+
+                  if (!estaPresionado) {
+                    // Sumar el valor del botón a la apuesta del jugador
+                    jugador.bid = apuestaActual + valorBoton;
+                    // Cambiar el fondo del botón a gris
+                    button.style.backgroundColor = 'gray';
+                  } else {
+                    // Restar el valor del botón de la apuesta del jugador
+                    jugador.bid = apuestaActual - valorBoton;
+                    // Cambiar el fondo del botón a su estado original (no gris)
+                    button.style.backgroundColor = ''; 
+                  }
+
+            
+                  apuestaElement.textContent = `Apuesta Actual: ${jugador.obtenerBid()}`;
+
+                  
+                
+                // apuestaMasAltaRonda = 0;
+                // const apuestaActual = jugador.obtenerBid() + valor;
+                // if (apuestaActual > apuestaMasAltaRonda || button.style.backgroundColor !== 'gray') {
+                //   jugadoresContadores[turnoActual] += (button.style.backgroundColor === 'gray' ? -valor : valor);
+                //   contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
+                //   button.style.backgroundColor = (button.style.backgroundColor === 'gray') ? '' : 'gray';
+                // }
+                
+            });
+            contenedor.appendChild(button);
+              
+          }
       }
 
-      
-      for (const valor of valoresArray) {
-        const button = document.createElement('button');
-        const img = document.createElement('img');
-        
-        img.src = valoresArrayImages[valor];
 
-        img.classList.add('botonesDinero');
+      function obtenerPuntaje(inventario){
+        let puntaje = 0;
 
-        button.appendChild(img);
+        for (let i = 0; i < inventario.length; i++) {
+            const carta = inventario[i];
+            
+            if (carta >= 1 && carta <= 10) {
+              puntaje += parseInt(carta);
+            } else if (carta === 'passe') {
+              puntaje -= 5;
+            } else if (carta === 'scaddale') {
+              puntaje /= 2;
+            } else if (carta === 'avantGarde' || carta === 'bonVivant' || carta === 'joieDeVivre') {
+              puntaje *= 2;
+            }
+          }
+        return puntaje;
 
-
-        button.addEventListener('click', () => {
-          // apuestaMasAltaRonda = 0;
-          // const apuestaActual = jugador.obtenerBid() + valor;
-          // if (apuestaActual > apuestaMasAltaRonda || button.style.backgroundColor !== 'gray') {
-          //   jugadoresContadores[turnoActual] += (button.style.backgroundColor === 'gray' ? -valor : valor);
-          //   contador.textContent = `Contador: ${jugadoresContadores[turnoActual]}`;
-          //   button.style.backgroundColor = (button.style.backgroundColor === 'gray') ? '' : 'gray';
-          // }
-          
-      });
-      contenedor.appendChild(button);
-        
-    }
-}
-
-
-function obtenerPuntaje(inventario){
-  let puntaje = 0;
-
-  for (let i = 0; i < inventario.length; i++) {
-      const carta = inventario[i];
-      
-      if (carta >= 1 && carta <= 10) {
-        puntaje += parseInt(carta);
-      } else if (carta === 'passe') {
-        puntaje -= 5;
-      } else if (carta === 'scaddale') {
-        puntaje /= 2;
-      } else if (carta === 'avantGarde' || carta === 'bonVivant' || carta === 'joieDeVivre') {
-        puntaje *= 2;
       }
-    }
-  return puntaje;
-
-}

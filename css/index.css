@@ -9,6 +9,11 @@ body{
 
 #jugadores-container{
     display: flex;
+    
+}
+#jugador{
+    margin-right: 20px;
+    background-color: aqua;
 }
 
 
