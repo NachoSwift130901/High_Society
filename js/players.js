@@ -20,7 +20,7 @@ const valoresArrayImages = {
 export default class Jugador{
     constructor(nombre){
         this.nombre = nombre;
-        this.dinero = [];
+        this.dinero = [...valoresArray];
         this.inventario = [];
         this.fold = false;
         this.bid = 0;

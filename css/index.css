@@ -7,7 +7,9 @@ body{
 }
 
 
-
+#jugadores-container{
+    display: flex;
+}
 
 
 
