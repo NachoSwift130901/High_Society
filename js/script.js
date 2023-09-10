@@ -10,62 +10,52 @@ const container = document.getElementById('contenedor');
 
 
 
-const jugadores = [new Jugador("MARII"), new Jugador("nacho"), new Jugador("juan")];
-console.log(`El estado de fold de ${jugadores[1].obtenerNombre()} es: ${jugadores[1].obtenerFold()}`);
-
-jugadores[1].rendirse();
-
-console.log(`El estado de fold de ${jugadores[1].obtenerNombre()} es: ${jugadores[1].obtenerFold()}`);
-
-
-
-
-
+const jugadores = [new Jugador("Taylor"), new Jugador("nacho"), new Jugador("ricochet")];
 
 
 const contenedor = document.getElementById("jugadores-container");
 
-
-// Itera a través de la lista de jugadores y crea un div para cada uno
-jugadores.forEach((jugador) => {
-  const jugadorDiv = document.createElement("div");
-  jugadorDiv.classList.add("jugador"); // Puedes agregar una clase CSS para dar estilo al div
-
-  // Crea elementos para mostrar los datos del jugador
-  const nombreElement = document.createElement("p");
-  nombreElement.textContent = `Jugador: ${jugador.obtenerNombre()}`;
-
-  const apuestaElement = document.createElement("p");
-  apuestaElement.textContent = `Apuesta Actual: ${jugador.obtenerBid()}`;
-
-  const cartasElement = document.createElement("p");
-  cartasElement.textContent = `Cartas: ${jugador.obtenerInventario().join(", ")}`;
-
-  // const dineroElement = document.createElement("p");
-  // dineroElement.textContent = `Dinero: ${jugador.obtenerDinero()}`;
-
-  const botonesDineroDiv = document.createElement('div');
-  botonesDineroDiv.classList.add("botonesDinero");
-
-  mostrarDinero(jugador, botonesDineroDiv, apuestaElement);
-
-  
-
-  // Agrega los elementos al div del jugador
-  jugadorDiv.appendChild(nombreElement);
-  jugadorDiv.appendChild(apuestaElement);
-  jugadorDiv.appendChild(cartasElement);
-  
-  jugadorDiv.appendChild(botonesDineroDiv);
-
-  
-  // Agrega el div del jugador al contenedor
-  contenedor.appendChild(jugadorDiv);
-});
+crearDivJugador();
 
 
 
-      
+      function crearDivJugador(){
+        jugadores.forEach((jugador) => {
+          const jugadorDiv = document.createElement("div");
+          jugadorDiv.classList.add("jugador"); // Puedes agregar una clase CSS para dar estilo al div
+        
+          // Crea elementos para mostrar los datos del jugador
+          const nombreElement = document.createElement("p");
+          nombreElement.textContent = `Jugador: ${jugador.obtenerNombre()}`;
+        
+          const apuestaElement = document.createElement("p");
+          apuestaElement.textContent = `Apuesta Actual: ${jugador.obtenerBid()}`;
+        
+          const cartasElement = document.createElement("p");
+          cartasElement.textContent = `Cartas: ${jugador.obtenerInventario().join(", ")}`;
+        
+          // const dineroElement = document.createElement("p");
+          // dineroElement.textContent = `Dinero: ${jugador.obtenerDinero()}`;
+        
+          const botonesDineroDiv = document.createElement('div');
+          botonesDineroDiv.classList.add("botonesDinero");
+        
+          mostrarDinero(jugador, botonesDineroDiv, apuestaElement);
+        
+          
+        
+          // Agrega los elementos al div del jugador
+          jugadorDiv.appendChild(nombreElement);
+          jugadorDiv.appendChild(apuestaElement);
+          jugadorDiv.appendChild(cartasElement);
+          
+          jugadorDiv.appendChild(botonesDineroDiv);
+        
+          
+          // Agrega el div del jugador al contenedor
+          contenedor.appendChild(jugadorDiv);
+        });
+        }
       function mostrarDinero(jugador, contenedor, apuestaElement){
             const valoresArray = jugador.obtenerDinero();
             const valoresArrayImages = {
@@ -133,4 +123,7 @@ jugadores.forEach((jugador) => {
           }
         return puntaje;
 
+      }
+      function ofertaMasAlta(){
+        
       }

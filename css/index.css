@@ -22,6 +22,7 @@ body{
 #listaCartas{
     margin-right: 20px;
     background-color: beige;
+    display: flex;
 }
 
 img{
@@ -31,5 +32,5 @@ img{
 }
 .botonesDinero{
     width: 50px;
-    
+    display:block
 }
